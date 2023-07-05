@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+.highcharts-figure, .highcharts-data-table table {
+  min-width: 310px;
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+#datatable {
+  font-family: Arial; 
+  border-collapse: collapse;
+  border: 1px solid #EBEBEB;
+  margin: 10px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+#datatable caption {
+  padding: 1em 0;
+  font-size: 2.0em;
+  color: #000000;
+}
+#datatable th {
+font-weight: 600;
+  padding: 0.5em;
+}
+#datatable td, #datatable th, #datatable caption {
+  padding: 0.5em;
+}
+#datatable thead tr, #datatable tr:nth-child(even) {
+  background: #f8f8f8;
+}
+#datatable tr:hover {
+  background: #f1f7ff;
+}
+</style>
+
+
+    <title> Gráfica 1 </title>
+  </head>
+  <body> 
+
+   <script src="https://code.highcharts.com/highcharts.js"> </script> 
+   <!-- <script src="https://code.highcharts.com/modules/sankey.js"></script>  -->
+   <script src="https://code.highcharts.com/modules/data.js"></script>
+   <script src="https://code.highcharts.com/modules/annotations.js"></script>
+   <script src="https://code.highcharts.com/modules/exporting.js"></script> 
+   <script src="https://code.highcharts.com/modules/export-data.js"></script>
+   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+   <script src="https://code.highcharts.com/highcharts-more.js"></script>
+   
+   
+   <!-- <h1> Gráficas </h1> -->
+   <hr> <div id="grafica1" style="height: 800px"></div> 
+   <!-- <hr> <div id="grafica2" style="height: 800px"></div>
+   <hr> <div id="grafica3" style="height: 800px"></div> -->
+   
+   <!-- <hr> <div id="container5" style="height: 800px"></div> 
+   <hr> <div id="container6" style="height: 800px"></div> -->
+   
+
+   <!-- <script src= "charts.js"></script> -->
+
+  
+  
+  
+  <script>
+  c_primario = '#E85753';
+c_secundario = '#FFBBDA';
+c_no_respuesta = '#BFBFBF';
+
+c_adm = '#f79fef';
+c_dg = '#993300';
+
+
+robot = 
+[
+  [	"2022-06-01"	,	54.7	],
+  [	"2022-07-01"	,	63.3	],
+  [	"2022-08-01"	,	52	],
+  [	"2022-10-01"	,	53.55	],
+  [	"2022-11-01"	,	49.7	],
+  [	"2022-12-01"	,	56	],
+  [	"2023-01-01"	,	51.83	],
+  [	"2023-02-01"	,	55.35	],
+  [	"2023-03-01"	,	60.1	],
+  [	"2023-04-01"	,	60.07	],
+  [	"2023-05-01"	,	59.5	],
+];
+
+robot_scatter = 
+[
+  ["2022-06-01", 54.7],
+  ["2022-07-01", 63.3],
+  ["2022-08-01", 50.7],
+  ["2022-08-01", 53.3],
+  ["2022-10-01", 51.2],
+  ["2022-10-01", 55.9],
+  ["2022-11-01", 48.8],
+  ["2022-11-01", 50.6],
+  ["2022-12-01", 51.2],
+  ["2022-12-01", 60.8],
+  ["2023-01-01", 52.5],
+  ["2023-01-01", 53.7],
+  ["2023-01-01", 49.9],
+  ["2023-01-01", 49.3],
+  ["2023-01-01", 52.7],
+  ["2023-01-01", 52.9],
+  ["2023-02-01", 55.6],
+  ["2023-02-01", 55.1],
+  ["2023-03-01", 61.4],
+  ["2023-03-01", 59.5],
+  ["2023-03-01", 59.3],
+  ["2023-03-01", 60.2],
+  ["2023-04-01", 59.9],
+  ["2023-04-01", 60.5],
+  ["2023-04-01", 59.8],
+  ["2023-05-01", 59.5]
+];
+
+robot_casa = 
+[
+  ["CEResearch"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["Metrics"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["Metrics"],
+  ["Massive Caller"],
+  ["Massive Caller"],
+  ["Massive Caller"],
+  ["Massive Caller"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["Metrics"],
+  ["Metrics"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["Metrics"],
+  ["CEResearch"],
+  ["CEResearch"],
+  ["CEResearch"],
+];
+
+telefonica = 
+[
+  [	"2022-06-01"	,	48.4	],
+  [	"2022-07-01"	,	49.4	],
+  [	"2022-10-01"	,	47.3	],
+  [	"2022-11-01"	,	50	],
+  [	"2023-01-01"	,	50.21	],
+  [	"2023-02-01"	,	49.3	],
+  [	"2023-03-01"	,	53.4	],
+  [	"2023-04-01"	,	54.27	],
+  [	"2023-05-01"	,	53.35	],
+];
+
+telefonica_scatter = 
+[
+  ["2022-06-01", 48.4],
+  ["2022-07-01", 49.4],
+  ["2022-10-01", 47.3],
+  ["2022-11-01", 50.9],
+  ["2022-11-01", 49.1],
+  ["2023-01-01", 51],
+  ["2023-01-01", 48.6],
+  ["2023-01-01", 50.8],
+  ["2023-01-01", 51.1],
+  ["2023-01-01", 50.4],
+  ["2023-01-01", 46.5],
+  ["2023-01-01", 52.1],
+  ["2023-01-01", 51.2],
+  ["2023-02-01", 48.5],
+  ["2023-02-01", 50.1],
+  ["2023-02-01", 50.8],
+  ["2023-02-01", 47.8],
+  ["2023-03-01", 53.4],
+  ["2023-04-01", 54.6],
+  ["2023-04-01", 53.2],
+  ["2023-04-01", 53.5],
+  ["2023-04-01", 57.8],
+  ["2023-04-01", 54],
+  ["2023-04-01", 52.5],
+  ["2023-05-01", 53.4],
+  ["2023-05-01", 53.3]      
+];
+
+telefonica_casa = 
+[
+  ["El Financiero"],
+  ["El Financiero"],
+  ["El Financiero"],
+  ["LaEncuesta.mx"],
+  ["LaEncuesta.mx"],
+  ["LaEncuesta.mx"],
+  ["LaEncuesta.mx"],
+  ["Rubrum"],
+  ["Rubrum"],
+  ["Rubrum"],
+  ["El Financiero"],
+  ["Rubrum"],
+  ["Rubrum"],
+  ["LaEncuesta.mx"],
+  ["Rubrum"],
+  ["Rubrum"],
+  ["LaEncuesta.mx"],
+  ["LaEncuesta.mx"],
+  ["Rubrum"],
+  ["Rubrum"],
+  ["Rubrum"],
+  ["El Financiero"],
+  ["Massive Caller"],
+  ["LaEncuesta.mx"],
+  ["Massive Caller"],
+  ["Rubrum"]
+];
+
+mixto = 
+[
+  ["2022-10-01", 59.7],
+  ["2022-11-01", 54.5],
+  ["2022-12-01", 60.05],
+  ["2023-01-01", 55.1],
+  ["2023-02-01", 61.3],
+  ["2023-03-01", 57.6],
+];
+
+mixto_scatter = 
+[
+  ["2022-10-01", 59.7],
+  ["2022-11-01", 54.5],
+  ["2022-12-01", 61.5],
+  ["2022-12-01", 58.6],
+  ["2023-01-01", 50.6],
+  ["2023-01-01", 59.6],
+  ["2023-02-01", 61.3],
+  ["2023-03-01", 58.7],
+  ["2023-03-01", 56.5],
+];
+
+mixto_casa = 
+[
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"Electoralia"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"El Financiero"	],
+  [	"Electoralia"	]
+];
+
+vivienda = 
+[
+  [	"2022-11-01"	,	56.75	],
+  [	"2022-12-01"	,	54.3	],
+  [	"2023-01-01"	,	56.8	],
+  [	"2023-02-01"	,	56	],
+  [	"2023-03-01"	,	61.7	],
+  [	"2023-04-01"	,	61.5	],
+];
+
+vivienda_scatter = 
+[
+  ["2022-11-01", 59.2],
+  ["2022-11-01", 54.3],
+  ["2022-12-01", 54.1],
+  ["2022-12-01", 54.5],
+  ["2023-01-01", 60.5],
+  ["2023-01-01", 57.5],
+  ["2023-01-01", 53.6],
+  ["2023-01-01", 55.6],
+  ["2023-02-01", 57],
+  ["2023-02-01", 55],
+  ["2023-03-01", 56.4],
+  ["2023-03-01", 59.5],
+  ["2023-03-01", 72.2],
+  ["2023-03-01", 58.7],
+  ["2023-04-01", 63.1],
+  ["2023-04-01", 62.2],
+  ["2023-04-01", 63.7],
+  ["2023-04-01", 57],  
+];
+
+vivienda_casa = 
+[
+  ["Parametría"],
+  ["Reforma"],
+  ["Tarjet"],
+  ["Enkroll"],
+  ["CEPLAN"],
+  ["Covarrubias"],
+  ["Votia"],
+  ["Enkroll"],
+  ["Parametría"],
+  ["Reforma"],
+  ["Mitofsky"],
+  ["Enkroll"],
+  ["CEPLAN"],
+  ["Tarjet"],
+  ["Votia"],
+  ["Covarrubias"],
+  ["Tarjet"],
+  ["Reforma"]
+];
+
+redes = 
+[
+  [	"2023-01-01"	,	58.45	],
+  [	"2023-02-01"	,	53.4	],
+  [	"2023-03-01"	,	54.45	],
+  [	"2023-04-01"	,	57.13	],  
+];
+
+redes_scatter = 
+[
+  ["2023-01-01", 61.7],
+  ["2023-01-01", 55.2],
+  ["2023-02-01", 53.4],
+  ["2023-03-01", 55.7],
+  ["2023-03-01", 53.2],
+  ["2023-04-01", 59.7],
+  ["2023-04-01", 55.8],
+  ["2023-04-01", 55.9],
+];
+
+redes_casa = 
+[
+  ["Cripes"],
+  ["Tresearch"],
+  ["Cripes"],
+  ["Cripes"],
+  ["Cripes"],
+  ["Tresearch"],
+  ["Cripes"],
+  ["Cripes"],
+];
+
+c_mixto = "#b52dc8";
+c_redes = "#ef476f";
+c_robot = "#f78c6b";
+c_telefonica = "#ffd166";
+c_vivienda = "#118ab2";
+
+let chart1 = Highcharts.chart('grafica1', {
+  credits: {
+    enabled: false
+  },
+  chart: {
+    style:{
+      fontFamily: 'Arial'
+    },
+},
+  title: {
+      text: 'Gráfica I. Estimación de votos para Delfina Gómez por modo de encuesta',
+      align: 'center',
+      style: {fontSize: '24px'}
+
+  },
+  xAxis: {
+  type: 'category',
+  gridLineDashStyle: 'Dot',
+  gridLineWidth: 3,
+  categories: ["2022-06-01", "2022-07-01", "2022-08-01", "", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01"],
+    labels: {
+      rotation: -90,
+      style: {fontSize: '20px'}
+    },
+    title : {
+      text: "Fecha",
+      style: {fontSize: '20px'}
+    }
+  },
+  yAxis: {
+    min: 0,
+    max: 70,
+    gridLineDashStyle: 'Dot',
+    gridLineWidth: 3,
+      title: {
+          text: "Porcentaje",
+          style: {fontSize: '20px'}
+      },
+      labels: {
+        style:{fontSize: '20px'}
+      }
+  },
+  legend: {
+    align: 'right',
+    verticalAlign: 'middle',
+    layout: 'vertical',
+    title:{
+      text: "Modo de encuesta",
+      style:{fontSize: '20px'}
+    },
+    itemStyle: {fontSize:'18px'}
+  },
+   tooltip: {
+    style: {fontSize: '15px'}
+  },  
+  caption: {
+    text: 'Se muestran los porcentajes efectivos de las encuestas.\n El número a la derecha muestra el resultado final.',
+    align: "center"
+  }, 
+  annotations: [{
+    labelOptions: {
+      verticalAlign: 'left', 
+      backgroundColor: 'white', 
+     // fontFamily: "Arial"
+    },
+    labels: [{
+      text: '52.6',
+     // y: 40,
+      point: {x:1100 ,y:140 },
+      
+    }]
+  }],
+  series: [
+    {
+      name: 'Mixto',
+      data: mixto,
+      zIndex: 1,
+      color:  c_mixto,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false 
+    },
+    {
+      type: 'scatter',
+      name: 'Mixto',
+      color: c_mixto,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: mixto_scatter,
+      tooltip: {pointFormatter(){return mixto_casa[this.index] + "<br>" + mixto_scatter[this.index][0] + "<br>" + mixto_scatter[this.index][1]}},
+    },
+    {
+      name: 'Redes sociales',
+      data: redes,
+      zIndex: 1,
+      color:  c_redes,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Redes sociales',
+      color: c_redes,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: redes_scatter,
+      tooltip: {pointFormatter(){return redes_casa[this.index] + "<br>" + redes_scatter[this.index][0] + "<br>" + redes_scatter[this.index][1]}},
+    },
+    {
+      name: 'Robot',
+      data: robot,
+      zIndex: 1,
+      color:  c_robot,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false   
+    },
+    {
+      type: 'scatter',
+      name: 'Robot',
+      color: c_robot,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: robot_scatter,
+      tooltip: {pointFormatter(){return robot_casa[this.index] + "<br>" + robot_scatter[this.index][0] + "<br>" + robot_scatter[this.index][1]}},
+    },
+    {
+      name: 'Telefónica',
+      data: telefonica,
+      zIndex: 1,
+      color:  c_telefonica,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Telefónica',
+      color: c_telefonica,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: telefonica_scatter,
+      tooltip: {pointFormatter(){return telefonica_casa[this.index] + "<br>" + telefonica_scatter[this.index][0] + "<br>" + telefonica_scatter[this.index][1]}},
+    },
+    {
+      name: 'Vivienda',
+      data: vivienda,
+      zIndex: 1,
+      color:  c_vivienda,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Vivienda',
+      color: c_vivienda,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: vivienda_scatter,
+      tooltip: {pointFormatter(){return vivienda_casa[this.index] + "<br>" + vivienda_scatter[this.index][0] + "<br>" + vivienda_scatter[this.index][1]}},
+    }
+  ]
+},
+function (chart) { 
+  chart.renderer.image('http://www.defoe.mx/wp-content/uploads/2023/05/LogoDEFOE01.png',
+  chart.plotLeft + chart.plotSizeX, chart.plotTop + chart.plotSizeY, 97.5, 65).add();
+});
+
+
+mixto_adm = 
+[
+  [	"2022-10-01"	,	32.4	],
+  [	"2022-11-01"	,	40.7	],
+  [	"2022-12-01"	,	34.6	],
+  [	"2023-01-01"	,	39.7	],
+  [	"2023-02-01"	,	34.5	],
+  [	"2023-03-01"	,	42.4	]
+];
+
+mixto_adm_scatter = 
+[
+  [	"2022-10-01"	,	32.4	],
+  [	"2022-11-01"	,	40.7	],
+  [	"2022-12-01"	,	33.6	],
+  [	"2022-12-01"	,	35.6	],
+  [	"2023-01-01"	,	41.6	],
+  [	"2023-01-01"	,	37.8	],
+  [	"2023-02-01"	,	34.5	],
+  [	"2023-03-01"	,	41.3	],
+  [	"2023-03-01"	,	43.5	]
+];
+
+mixto_adm_casa = 
+[
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"Electoralia"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"El Financiero"	],
+  [	"Electoralia"	]
+];
+
+redes_adm = 
+[
+  [	"2023-01-01"	,	31.7	],
+  [	"2023-02-01"	,	35.6	],
+  [	"2023-03-01"	,	40.2	],
+  [	"2023-04-01"	,	42.87	]
+];
+
+redes_adm_scatter = 
+[
+  [	"2023-01-01"	,	29.8	],
+  [	"2023-01-01"	,	33.6	],
+  [	"2023-02-01"	,	35.6	],
+  [	"2023-03-01"	,	44.3	],
+  [	"2023-03-01"	,	36.1	],
+  [	"2023-04-01"	,	40.3	],
+  [	"2023-04-01"	,	44.2	],
+  [	"2023-04-01"	,	44.1	]
+];
+
+redes_adm_casa = 
+[
+  [	"Cripes"	],
+  [	"Tresearch"	],
+  [	"Cripes"	],
+  [	"Cripes"	],
+  [	"Cripes"	],
+  [	"Tresearch"	],
+  [	"Cripes"	],
+  [	"Cripes"	]
+];
+
+robot_adm = 
+[
+  [	"2022-06-01",	38.4	],
+  [	"2022-07-01",	26.7	],
+  [	"2022-08-01",	39.35	],
+  [	"2022-10-01",	31.15	],
+  [	"2022-11-01",	37.1	],
+  [	"2022-12-01",	34.85	],
+  [	"2023-01-01",	40.08	],
+  [	"2023-02-01",	39	],
+  [	"2023-03-01",	39.9	],
+  [	"2023-04-01",	39.93	],
+  [	"2023-05-01",	40.5	]
+];
+
+robot_adm_scatter = 
+[
+  [	"2022-06-01"	,	38.4	],
+  [	"2022-07-01"	,	26.7	],
+  [	"2022-08-01"	,	40	],
+  [	"2022-08-01"	,	38.7	],
+  [	"2022-10-01"	,	29.1	],
+  [	"2022-10-01"	,	33.2	],
+  [	"2022-11-01"	,	36.9	],
+  [	"2022-11-01"	,	37.3	],
+  [	"2022-12-01"	,	39	],
+  [	"2022-12-01"	,	30.7	],
+  [	"2023-01-01"	,	41	],
+  [	"2023-01-01"	,	40.4	],
+  [	"2023-01-01"	,	42.1	],
+  [	"2023-01-01"	,	42	],
+  [	"2023-01-01"	,	38.5	],
+  [	"2023-01-01"	,	36.5	],
+  [	"2023-02-01"	,	37	],
+  [	"2023-02-01"	,	41	],
+  [	"2023-03-01"	,	38.6	],
+  [	"2023-03-01"	,	40.5	],
+  [	"2023-03-01"	,	40.7	],
+  [	"2023-03-01"	,	39.8	],
+  [	"2023-04-01"	,	40.1	],
+  [	"2023-04-01"	,	39.5	],
+  [	"2023-04-01"	,	40.2	],
+  [	"2023-05-01"	,	40.5	]
+];
+
+robot_adm_casa = 
+[
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"Metrics"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"Metrics"	],
+  [	"Massive Caller"	],
+  [	"Massive Caller"	],
+  [	"Massive Caller"	],
+  [	"Massive Caller"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"Metrics"	],
+  [	"Metrics"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"Metrics"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	]
+];
+
+telefonica_adm = 
+[
+  [	"2022-06-01"	,	37.4	],
+  [	"2022-07-01"	,	35.1	],
+  [	"2022-10-01"	,	35.5	],
+  [	"2022-11-01"	,	38.45	],
+  [	"2023-01-01"	,	41.25	],
+  [	"2023-02-01"	,	41.92	],
+  [	"2023-03-01"	,	46.6	],
+  [	"2023-04-01"	,	45.73	],
+  [	"2023-05-01"	,	46.65	]
+];
+
+telefonica_adm_scatter = 
+[
+  [	"2022-06-01"	,	37.4	],
+  [	"2022-07-01"	,	35.1	],
+  [	"2022-10-01"	,	35.5	],
+  [	"2022-11-01"	,	38.5	],
+  [	"2022-11-01"	,	38.4	],
+  [	"2023-01-01"	,	39.4	],
+  [	"2023-01-01"	,	39.2	],
+  [	"2023-01-01"	,	42	],
+  [	"2023-01-01"	,	43.5	],
+  [	"2023-01-01"	,	43.8	],
+  [	"2023-01-01"	,	37.8	],
+  [	"2023-01-01"	,	42	],
+  [	"2023-01-01"	,	42.3	],
+  [	"2023-02-01"	,	41.5	],
+  [	"2023-02-01"	,	42.9	],
+  [	"2023-02-01"	,	42.4	],
+  [	"2023-02-01"	,	40.9	],
+  [	"2023-03-01"	,	46.6	],
+  [	"2023-04-01"	,	45.4	],
+  [	"2023-04-01"	,	46.8	],
+  [	"2023-04-01"	,	46.5	],
+  [	"2023-04-01"	,	42.2	],
+  [	"2023-04-01"	,	46	],
+  [	"2023-04-01"	,	47.5	],
+  [	"2023-05-01"	,	46.6	],
+  [	"2023-05-01"	,	46.7	]
+];
+
+telefonica_adm_casa = 
+[
+  [	"El Financiero"	],
+  [	"El Financiero"	],
+  [	"El Financiero"	],
+  [	"LaEncuesta.mx"	],
+  [	"LaEncuesta.mx"	],
+  [	"LaEncuesta.mx"	],
+  [	"LaEncuesta.mx"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"El Financiero"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"LaEncuesta.mx"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"LaEncuesta.mx"	],
+  [	"LaEncuesta.mx"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"El Financiero"	],
+  [	"Massive Caller"	],
+  [	"LaEncuesta.mx"	],
+  [	"Massive Caller"	],
+  [	"Rubrum"	]
+];
+
+vivienda_adm = 
+[
+  [	"2022-11-01"	,	33.55	],
+  [	"2022-12-01"	,	34.25	],
+  [	"2023-01-01"	,	34.15	],
+  [	"2023-02-01"	,	36.35	],
+  [	"2023-03-01"	,	38.33	],
+  [	"2023-04-01"	,	38.5	]
+];
+
+vivienda_adm_scatter = 
+[
+  [	"2022-11-01"	,	35.7	],
+  [	"2022-11-01"	,	31.4	],
+  [	"2022-12-01"	,	38.6	],
+  [	"2022-12-01"	,	29.9	],
+  [	"2023-01-01"	,	28.8	],
+  [	"2023-01-01"	,	36.3	],
+  [	"2023-01-01"	,	34.5	],
+  [	"2023-01-01"	,	37	],
+  [	"2023-02-01"	,	31.6	],
+  [	"2023-02-01"	,	41.1	],
+  [	"2023-03-01"	,	43.6	],
+  [	"2023-03-01"	,	40.5	],
+  [	"2023-03-01"	,	27.9	],
+  [	"2023-03-01"	,	41.3	],
+  [	"2023-04-01"	,	36.9	],
+  [	"2023-04-01"	,	37.8	],
+  [	"2023-04-01"	,	36.3	],
+  [	"2023-04-01"	,	43	]
+];
+
+vivienda_adm_casa = 
+[
+  [	"Parametría"	],
+  [	"Reforma"	],
+  [	"Tarjet"	],
+  [	"Enkroll"	],
+  [	"CEPLAN"	],
+  [	"Covarrubias"	],
+  [	"Votia"	],
+  [	"Enkroll"	],
+  [	"Parametría"	],
+  [	"Reforma"	],
+  [	"Mitofsky"	],
+  [	"Enkroll"	],
+  [	"CEPLAN"	],
+  [	"Tarjet"	],
+  [	"Votia"	],
+  [	"Covarrubias"	],
+  [	"Tarjet"	],
+  [	"Reforma"	]
+];
+
+let chart2 = Highcharts.chart('grafica2', {
+  credits: {
+    enabled: false
+  },
+  chart: {
+    style:{
+      fontFamily: 'Arial'
+    },
+},
+  title: {
+      text: 'Gráfica II.Estimación de votos para Alejandra del Moral por modo de encuesta',
+      align: 'center',
+      style: {fontSize: '24px'}
+
+  },
+  xAxis: {
+  type: 'category',
+  gridLineDashStyle: 'Dot',
+  gridLineWidth: 3,
+  categories: ["2022-06-01", "2022-07-01", "2022-08-01", "", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01"],
+    labels: {
+      rotation: -90,
+      style: {fontSize: '20px'}
+    },
+    title : {
+      text: "Fecha",
+      style: {fontSize: '20px'}
+    }
+  },
+  yAxis: {
+    min: 0,
+    max: 60,
+    gridLineDashStyle: 'Dot',
+    gridLineWidth: 3,
+      title: {
+          text: "Porcentaje",
+          style: {fontSize: '20px'}
+      },
+      labels: {
+        style:{fontSize: '20px'}
+      }
+  },
+  legend: {
+    align: 'right',
+    verticalAlign: 'middle',
+    layout: 'vertical',
+    title:{
+      text: "Modo de encuesta",
+      style:{fontSize: '20px'}
+    },
+    itemStyle: {fontSize:'18px'}
+  },
+   tooltip: {
+    style: {fontSize: '15px'}
+  },  
+  caption: {
+    text: 'Se muestran los porcentajes efectivos de las encuestas.\n El número a la derecha muestra el resultado final.',
+    align: "center"
+  }, 
+  annotations: [{
+    labelOptions: {
+      verticalAlign: 'left', 
+      backgroundColor: 'white', 
+     // fontFamily: "Arial"
+    },
+    labels: [{
+      text: '44.3',
+     // y: 40,
+      point: {x:1100 ,y:125 },
+      
+    }]
+  }],
+  series: [
+    {
+      name: 'Mixto',
+      data: mixto_adm,
+      zIndex: 1,
+      color:  c_mixto,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false 
+    },
+    {
+      type: 'scatter',
+      name: 'Mixto',
+      color: c_mixto,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: mixto_adm_scatter,
+      tooltip: {pointFormatter(){return mixto_adm_casa[this.index] + "<br>" + mixto_adm_scatter[this.index][0] + "<br>" + mixto_adm_scatter[this.index][1]}},
+    },
+    {
+      name: 'Redes sociales',
+      data: redes_adm,
+      zIndex: 1,
+      color:  c_redes,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Redes sociales',
+      color: c_redes,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: redes_adm_scatter,
+      tooltip: {pointFormatter(){return redes_adm_casa[this.index] + "<br>" + redes_adm_scatter[this.index][0] + "<br>" + redes_adm_scatter[this.index][1]}},
+    },
+    {
+      name: 'Robot',
+      data: robot_adm,
+      zIndex: 1,
+      color:  c_robot,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false   
+    },
+    {
+      type: 'scatter',
+      name: 'Robot',
+      color: c_robot,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: robot_adm_scatter,
+      tooltip: {pointFormatter(){return robot_adm_casa[this.index] + "<br>" + robot_adm_scatter[this.index][0] + "<br>" + robot_adm_scatter[this.index][1]}},
+    },
+    {
+      name: 'Telefónica',
+      data: telefonica_adm,
+      zIndex: 1,
+      color:  c_telefonica,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Telefónica',
+      color: c_telefonica,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: telefonica_adm_scatter,
+      tooltip: {pointFormatter(){return telefonica_adm_casa[this.index] + "<br>" + telefonica_adm_scatter[this.index][0] + "<br>" + telefonica_adm_scatter[this.index][1]}},
+    },
+    {
+      name: 'Vivienda',
+      data: vivienda_adm,
+      zIndex: 1,
+      color:  c_vivienda,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Vivienda',
+      color: c_vivienda,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: vivienda_adm_scatter,
+      tooltip: {pointFormatter(){return vivienda_adm_casa[this.index] + "<br>" + vivienda_adm_scatter[this.index][0] + "<br>" + vivienda_adm_scatter[this.index][1]}},
+    }
+  ]
+},
+function (chart) { 
+  chart.renderer.image('http://www.defoe.mx/wp-content/uploads/2023/05/LogoDEFOE01.png',
+  chart.plotLeft + chart.plotSizeX, chart.plotTop + chart.plotSizeY, 97.5, 65).add();
+});
+
+
+mixto_dif = 
+[
+  [	"2022-10-01"	,	27.3	],
+  [	"2022-11-01"	,	13.8	],
+  [	"2022-12-01"	,	25.4	],
+  [	"2023-01-01"	,	15.4	],
+  [	"2023-02-01"	,	26.8	],
+  [	"2023-03-01"	,	15.1	]
+];
+
+mixto_dif_scatter = 
+[
+  [	"2022-10-01"	,	27.3	],
+  [	"2022-11-01"	,	13.8	],
+  [	"2022-12-01"	,	27.8	],
+  [	"2022-12-01"	,	23	],
+  [	"2023-01-01"	,	9	],
+  [	"2023-01-01"	,	21.8	],
+  [	"2023-02-01"	,	26.8	],
+  [	"2023-03-01"	,	17.3	],
+  [	"2023-03-01"	,	12.9	]
+];
+
+mixto_dif_casa = 
+[
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"Electoralia"	],
+  [	"FactoMetrica"	],
+  [	"FactoMetrica"	],
+  [	"El Financiero"	],
+  [	"Electoralia"	]
+];
+
+redes_dif = 
+[
+  [	"2023-01-01"	,	26.8	],
+  [	"2023-02-01"	,	17.8	],
+  [	"2023-03-01"	,	14.25	],
+  [	"2023-04-01"	,	14.2	]
+];
+
+redes_dif_scatter = 
+[
+  [	"2023-01-01"	,	31.9	],
+  [	"2023-01-01"	,	21.7	],
+  [	"2023-02-01"	,	17.8	],
+  [	"2023-03-01"	,	11.4	],
+  [	"2023-03-01"	,	17.1	],
+  [	"2023-04-01"	,	19.4	],
+  [	"2023-04-01"	,	11.5	],
+  [	"2023-04-01"	,	11.7	]
+];
+
+redes_dif_casa = 
+[
+  [	"Cripes"	],
+  [	"Tresearch"	],
+  [	"Cripes"	],
+  [	"Cripes"	],
+  [	"Cripes"	],
+  [	"Tresearch"	],
+  [	"Cripes"	],
+  [	"Cripes"	]
+];
+
+robot_dif = 
+[
+  [	"2022-06-01"	,	16.3	],
+  [	"2022-07-01"	,	36.7	],
+  [	"2022-08-01"	,	12.7	],
+  [	"2022-10-01"	,	22.45	],
+  [	"2022-11-01"	,	12.6	],
+  [	"2022-12-01"	,	21.2	],
+  [	"2023-01-01"	,	11.75	],
+  [	"2023-02-01"	,	16.3	],
+  [	"2023-03-01"	,	20.23	],
+  [	"2023-04-01"	,	20.13	],
+  [	"2023-05-01"	,	19	]
+];
+
+robot_dif_scatter =
+[
+  [	"2022-06-01"	,	16.3	],
+  [	"2022-07-01"	,	36.7	],
+  [	"2022-08-01"	,	10.7	],
+  [	"2022-08-01"	,	14.7	],
+  [	"2022-10-01"	,	22.1	],
+  [	"2022-10-01"	,	22.8	],
+  [	"2022-11-01"	,	11.9	],
+  [	"2022-11-01"	,	13.3	],
+  [	"2022-12-01"	,	12.2	],
+  [	"2022-12-01"	,	30.2	],
+  [	"2023-01-01"	,	11.4	],
+  [	"2023-01-01"	,	13.3	],
+  [	"2023-01-01"	,	7.8	],
+  [	"2023-01-01"	,	7.2	],
+  [	"2023-01-01"	,	14.3	],
+  [	"2023-01-01"	,	16.5	],
+  [	"2023-02-01"	,	18.5	],
+  [	"2023-02-01"	,	14.1	],
+  [	"2023-03-01"	,	22.8	],
+  [	"2023-03-01"	,	19	],
+  [	"2023-03-01"	,	18.6	],
+  [	"2023-03-01"	,	20.5	],
+  [	"2023-04-01"	,	19.9	],
+  [	"2023-04-01"	,	21	],
+  [	"2023-04-01"	,	19.5	],
+  [	"2023-05-01"	,	19	]
+];
+
+robot_dif_casa = 
+[
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"Metrics"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"Metrics"	],
+  [	"Massive Caller"	],
+  [	"Massive Caller"	],
+  [	"Massive Caller"	],
+  [	"Massive Caller"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"Metrics"	],
+  [	"Metrics"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"Metrics"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	],
+  [	"CEResearch"	]
+];
+
+telefonica_dif = 
+[
+  [	"2022-06-01"	,	11	],
+  [	"2022-07-01"	,	14.3	],
+  [	"2022-10-01"	,	11.8	],
+  [	"2022-11-01"	,	11.55	],
+  [	"2023-01-01"	,	8.93	],
+  [	"2023-02-01"	,	7.4	],
+  [	"2023-03-01"	,	6.8	],
+  [	"2023-04-01"	,	8.57	],
+  [	"2023-05-01"	,	6.7	]
+];
+
+telefonica_dif_scatter = 
+[
+  [	"2022-06-01"	,	11	],
+  [	"2022-07-01"	,	14.3	],
+  [	"2022-10-01"	,	11.8	],
+  [	"2022-11-01"	,	12.4	],
+  [	"2022-11-01"	,	10.7	],
+  [	"2023-01-01"	,	11.6	],
+  [	"2023-01-01"	,	9.4	],
+  [	"2023-01-01"	,	8.8	],
+  [	"2023-01-01"	,	7.6	],
+  [	"2023-01-01"	,	6.5	],
+  [	"2023-01-01"	,	8.6	],
+  [	"2023-01-01"	,	10	],
+  [	"2023-01-01"	,	8.9	],
+  [	"2023-02-01"	,	7	],
+  [	"2023-02-01"	,	7.2	],
+  [	"2023-02-01"	,	8.5	],
+  [	"2023-02-01"	,	6.9	],
+  [	"2023-03-01"	,	6.8	],
+  [	"2023-04-01"	,	9.2	],
+  [	"2023-04-01"	,	6.4	],
+  [	"2023-04-01"	,	7.1	],
+  [	"2023-04-01"	,	15.7	],
+  [	"2023-04-01"	,	7.9	],
+  [	"2023-04-01"	,	5.1	],
+  [	"2023-05-01"	,	6.9	],
+  [	"2023-05-01"	,	6.5	]
+];
+
+telefonica_dif_casa = 
+[
+  [	"El Financiero"	],
+  [	"El Financiero"	],
+  [	"El Financiero"	],
+  [	"LaEncuesta.mx"	],
+  [	"LaEncuesta.mx"	],
+  [	"LaEncuesta.mx"	],
+  [	"LaEncuesta.mx"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"El Financiero"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"LaEncuesta.mx"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"LaEncuesta.mx"	],
+  [	"LaEncuesta.mx"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"Rubrum"	],
+  [	"El Financiero"	],
+  [	"Massive Caller"	],
+  [	"LaEncuesta.mx"	],
+  [	"Massive Caller"	],
+  [	"Rubrum"	]
+];
+
+vivienda_dif = 
+[
+  [	"2022-11-01"	,	23.2	],
+  [	"2022-12-01"	,	20.1	],
+  [	"2023-01-01"	,	22.62	],
+  [	"2023-02-01"	,	19.6	],
+  [	"2023-03-01"	,	23.38	],
+  [	"2023-04-01"	,	22.92	]
+];
+
+vivienda_dif_scatter = 
+[
+  [	"2022-11-01"	,	23.5	],
+  [	"2022-11-01"	,	22.9	],
+  [	"2022-12-01"	,	15.5	],
+  [	"2022-12-01"	,	24.7	],
+  [	"2023-01-01"	,	31.7	],
+  [	"2023-01-01"	,	21.3	],
+  [	"2023-01-01"	,	19	],
+  [	"2023-01-01"	,	18.5	],
+  [	"2023-02-01"	,	25.3	],
+  [	"2023-02-01"	,	13.9	],
+  [	"2023-03-01"	,	12.8	],
+  [	"2023-03-01"	,	19	],
+  [	"2023-03-01"	,	44.3	],
+  [	"2023-03-01"	,	17.4	],
+  [	"2023-04-01"	,	26.2	],
+  [	"2023-04-01"	,	24.3	],
+  [	"2023-04-01"	,	27.3	],
+  [	"2023-04-01"	,	13.9	]
+];
+
+vivienda_dif_casa = 
+[
+  [	"Parametría"	],
+  [	"Reforma"	],
+  [	"Tarjet"	],
+  [	"Enkroll"	],
+  [	"CEPLAN"	],
+  [	"Covarrubias"	],
+  [	"Votia"	],
+  [	"Enkroll"	],
+  [	"Parametría"	],
+  [	"Reforma"	],
+  [	"Mitofsky"	],
+  [	"Enkroll"	],
+  [	"CEPLAN"	],
+  [	"Tarjet"	],
+  [	"Votia"	],
+  [	"Covarrubias"	],
+  [	"Tarjet"	],
+  [	"Reforma"	]
+];
+
+
+let chart3 = Highcharts.chart('grafica3', {
+  credits: {
+    enabled: false
+  },
+  chart: {
+    style:{
+      fontFamily: 'Arial'
+    },
+},
+  title: {
+      text: 'Gráfica III.Estimación de la diferencia de votos por modo de encuesta',
+      align: 'center',
+      style: {fontSize: '24px'}
+
+  },
+  xAxis: {
+  type: 'category',
+  gridLineDashStyle: 'Dot',
+  gridLineWidth: 3,
+  categories: ["2022-06-01", "2022-07-01", "2022-08-01", "", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01"],
+    labels: {
+      rotation: -90,
+      style: {fontSize: '20px'}
+    },
+    title : {
+      text: "Fecha",
+      style: {fontSize: '20px'}
+    }
+  },
+  yAxis: {
+    min: 0,
+    max: 50,
+    gridLineDashStyle: 'Dot',
+    gridLineWidth: 3,
+      title: {
+          text: "Porcentaje",
+          style: {fontSize: '20px'}
+      },
+      labels: {
+        style:{fontSize: '20px'}
+      }
+  },
+  legend: {
+    align: 'right',
+    verticalAlign: 'middle',
+    layout: 'vertical',
+    title:{
+      text: "Modo de encuesta",
+      style:{fontSize: '20px'}
+    },
+    itemStyle: {fontSize:'18px'}
+  },
+   tooltip: {
+    style: {fontSize: '15px'}
+  },  
+  caption: {
+    text: 'Se muestran los porcentajes efectivos de las encuestas.\n El número a la derecha muestra el resultado final.',
+    align: "center"
+  }, 
+  annotations: [{
+    labelOptions: {
+      verticalAlign: 'left', 
+      backgroundColor: 'white', 
+     // fontFamily: "Arial"
+    },
+    labels: [{
+      text: '8.3',
+     // y: 40,
+      point: {x:1100 ,y:490 },
+      
+    }]
+  }],
+  series: [
+    {
+      name: 'Mixto',
+      data: mixto_dif,
+      zIndex: 1,
+      color:  c_mixto,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false 
+    },
+    {
+      type: 'scatter',
+      name: 'Mixto',
+      color: c_mixto,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: mixto_dif_scatter,
+      tooltip: {pointFormatter(){return mixto_dif_casa[this.index] + "<br>" + mixto_dif_scatter[this.index][0] + "<br>" + mixto_dif_scatter[this.index][1]}},
+    },
+    {
+      name: 'Redes sociales',
+      data: redes_dif,
+      zIndex: 1,
+      color:  c_redes,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Redes sociales',
+      color: c_redes,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: redes_dif_scatter,
+      tooltip: {pointFormatter(){return redes_dif_casa[this.index] + "<br>" + redes_dif_scatter[this.index][0] + "<br>" + redes_dif_scatter[this.index][1]}},
+    },
+    {
+      name: 'Robot',
+      data: robot_dif,
+      zIndex: 1,
+      color:  c_robot,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false   
+    },
+    {
+      type: 'scatter',
+      name: 'Robot',
+      color: c_robot,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: robot_dif_scatter,
+      tooltip: {pointFormatter(){return robot_dif_casa[this.index] + "<br>" + robot_dif_scatter[this.index][0] + "<br>" + robot_dif_scatter[this.index][1]}},
+    },
+    {
+      name: 'Telefónica',
+      data: telefonica_dif,
+      zIndex: 1,
+      color:  c_telefonica,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Telefónica',
+      color: c_telefonica,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: telefonica_dif_scatter,
+      tooltip: {pointFormatter(){return telefonica_dif_casa[this.index] + "<br>" + telefonica_dif_scatter[this.index][0] + "<br>" + telefonica_dif_scatter[this.index][1]}},
+    },
+    {
+      name: 'Vivienda',
+      data: vivienda_dif,
+      zIndex: 1,
+      color:  c_vivienda,
+      lineWidth: 3,
+      dashStyle: "Dash",
+      marker: false
+    },
+    {
+      type: 'scatter',
+      name: 'Vivienda',
+      color: c_vivienda,
+      linkedTo: ':previous',
+      marker:{symbol: 'circle'},
+      data: vivienda_dif_scatter,
+      tooltip: {pointFormatter(){return vivienda_dif_casa[this.index] + "<br>" + vivienda_dif_scatter[this.index][0] + "<br>" + vivienda_dif_scatter[this.index][1]}},
+    }
+  ]
+},
+function (chart) { 
+  chart.renderer.image('http://www.defoe.mx/wp-content/uploads/2023/05/LogoDEFOE01.png',
+  chart.plotLeft + chart.plotSizeX, chart.plotTop + chart.plotSizeY, 97.5, 65).add();
+});
+
+  </script>
+
+  </body>
+</html>
